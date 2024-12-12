@@ -11,7 +11,9 @@
 
 @section('content')
 
-
+@if (Auth::user() && Auth::user()->hasRole('admim'))
+<p>Bem-vindo, Administrador! Seu ID é: {{ Auth::user()->id}}</p>
+@endif
 <h2>Profile content</h2>
 
 
