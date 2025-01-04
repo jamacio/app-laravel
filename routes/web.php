@@ -17,4 +17,3 @@ Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])
 
 
 Route::resource('roles', RoleController::class);
-Route::get('roles/rules', [RoleController::class, 'indexRules'])->name('roles.index_rules');
