@@ -9,6 +9,8 @@ class Role extends Model
 {
     protected $table = 'role';
 
+    public $timestamps = false;
+
     protected $fillable = ['name'];
 
     public function users(): BelongsToMany
