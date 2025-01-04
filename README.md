@@ -1,62 +1,109 @@
-# Setup Docker Para Projetos Laravel (8, 9, 10 ou 11)
+# Laravel Boilerplate Project with AdminLTE
 
-Crie o Arquivo .env
+This project is a Laravel boilerplate that includes integration with AdminLTE, an admin panel based on Bootstrap. It provides a ready-to-use structure for developing web applications with a modern and responsive admin panel.
+
+## TODO
+
+Before starting, make sure you have the following requirements installed:
+
+### Install Docker
+
+```sh
+sudo apt-get update
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+
+### Install Docker Compose
+
+```sh
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+### Install Make
+
+```sh
+sudo apt-get update
+sudo apt-get install make
+```
+
+## Step by Step
+
+### 1. Create the .env File
 
 ```sh
 cp .env.example .env
 ```
 
-Atualize as variáveis de ambiente do arquivo .env
-
-```dosini
-APP_NAME="Especializa Ti"
-APP_URL=http://localhost:8989
-
-DB_CONNECTION=mysql
-DB_HOST=db
-DB_PORT=3306
-DB_DATABASE=laravel
-DB_USERNAME=root
-DB_PASSWORD=root
-
-CACHE_DRIVER=redis
-QUEUE_CONNECTION=redis
-SESSION_DRIVER=redis
-
-REDIS_HOST=redis
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-```
-
-Suba os containers do projeto
+### 2. Bring up the project containers
 
 ```sh
-docker-compose up -d
+make up
 ```
 
-Acessar o container
+### 3. Access the container
 
 ```sh
-docker-compose exec app bash
+make bash
 ```
 
-Instalar as dependências do projeto
+### 4. Install project dependencies
 
 ```sh
 composer install
 ```
 
-Gerar a key do projeto Laravel
+### 5. Generate the Laravel project key
 
 ```sh
 php artisan key:generate
 ```
 
-Migrar as tabelas
+### 6. Migrate the tables
 
 ```sh
- php artisan migrate
+php artisan migrate
 ```
 
-Acessar o projeto
+### 7. Access the project
+
 [http://localhost:8989](http://localhost:8989)
+
+### Additional Commands
+
+-   Stop the containers:
+
+```sh
+make stop
+```
+
+-   Take down the containers:
+
+```sh
+make down
+```
+
+-   Rebuild the containers:
+
+```sh
+make build
+```
+
+-   Watch the container logs:
+
+```sh
+make watch
+```
